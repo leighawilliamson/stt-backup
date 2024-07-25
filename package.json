@@ -1,0 +1,25 @@
+{
+  "name": "customization-backup",
+  "version": "1.0.0",
+  "description": "Node.js Express job on IBM Code Engine.",
+  "private": true,
+  "engines": {
+    "node": "v20.11.1"
+  },
+  "scripts": {
+    "dev": "nodemon src/app.js",
+    "start": "node src/app.js",
+    "lint": "eslint --ignore-path .gitignore .",
+    "fix": "eslint --ignore-path .gitignore . --fix"
+  },
+  "dependencies": {
+    "dotenv": "^16.0.0",
+    "ibm-watson": "^8.0.0",
+    "ibm-cos-sdk": "^1.13.3"
+  },
+  "devDependencies": {
+    "eslint": "^8.8.0",
+    "eslint-config-strongloop": "^2.1.0",
+    "nodemon": "^2.0.15"
+  }
+}
