@@ -10,4 +10,4 @@ COPY src/*.js /app
 ENV NODE_ENV production
 
 EXPOSE 8080
-CMD [ "node", "src/app.js" ]
+CMD [ "node", "app.js" ]
