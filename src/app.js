@@ -18,16 +18,42 @@ let cos = null;
 let speechToText = null;
 let languageModels = null;
 
-// log the values read from environment that will be used for this job
-console.log("************* Start backing up " + the_name + " service instance *********");
-//console.log("from: " + the_url);
-//console.log("using API Key: " + the_apikey);
-console.log("to Cloud Object Storage bucket: " + target_bucket);
+/* -----------------------------------------------
+*  check_param function 
+*/
+async function check_param(name,param){
+  if ((typeof param == undefined) || (param == null)){
+    console.error("Configuration variable not set: " + name);
+    console.error("STT Backup utility cannot continue.");
+    process.exit(-1);
+  }
+}
+// ---------------------------------------------------
+
+/* -----------------------------------------------
+*  validate_params function 
+*/
+async function validate_params(){
+  await check_param("STT_APIKEY",the_apikey);
+  await check_param("STT_URL",the_url);
+  await check_param("STT_NAME",the_name);
+  await check_param("STT_BACKUP_BUCKET",target_bucket);
+  await check_param("COS_ENDPOINT",cos_endpoint_url);
+  await check_param("HMAC_KEY_ID",hmac_key_id);
+  await check_param("HMAC_SECRET",hmac_secret);
+}
+// ---------------------------------------------------
 
 /* -----------------------------------------------
 *  setup function 
 */
 async function setup(){ 
+
+  await validate_params();
+
+  console.log("************* Start backing up " + the_name + " service instance *********");
+  console.log("to Cloud Object Storage bucket: " + target_bucket);
+
   // connect with COS 
   let s3Config = {
     accessKeyId: hmac_key_id,
